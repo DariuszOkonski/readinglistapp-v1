@@ -1,9 +1,11 @@
 import BookForm from "../components/BookForm";
 import BookList from "../components/BookList";
+import { useAuthContext } from "../hooks/useAuthContext";
 import { useCollection } from "../hooks/useCollection";
 
 export default function Home() {
-  const { documents: books } = useCollection("books");
+  const { user } = useAuthContext();
+  const { documents: books } = useCollection("books", ["uid", "==", user.uid]);
 
   return (
     <div>
